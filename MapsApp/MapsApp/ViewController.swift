@@ -16,6 +16,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(konumSec(gestureRecognizer: )))
+        gestureRecognizer.minimumPressDuration = 2
+        mapKit.addGestureRecognizer(gestureRecognizer)
+    }
+    @objc func konumSec(gestureRecognizer : UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            let dokunulanNokta = gestureRecognizer.location(in: mapKit)
+            let dokunulanKoordinat = mapKit.convert(dokunulanNokta, toCoordinateFrom: mapKit)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = dokunulanKoordinat
+            annotation.title = "Selected Area"
+            annotation.subtitle = "Selected"
+            mapKit.addAnnotation(annotation)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -25,5 +41,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapKit.setRegion(region, animated: true)
         
     }
+    
 }
 
