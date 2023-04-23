@@ -58,8 +58,7 @@
 		AE2E577F29F5C01000E13612 /* MapsApp */ = {
 			isa = PBXGroup;
 			children = (
-				AE2E578029F5C01000E13612 /* AppDelegate.swift */,
-				AE2E578229F5C01000E13612 /* SceneDelegate.swift */,
+				AE2E579729F5D12D00E13612 /* Delegate */,
 				AE2E578429F5C01000E13612 /* ViewController.swift */,
 				AE2E578629F5C01000E13612 /* Main.storyboard */,
 				AE2E578C29F5C01100E13612 /* Assets.xcassets */,
@@ -68,6 +67,15 @@
 				AE2E578929F5C01000E13612 /* MapsApp.xcdatamodeld */,
 			);
 			path = MapsApp;
+			sourceTree = "<group>";
+		};
+		AE2E579729F5D12D00E13612 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				AE2E578229F5C01000E13612 /* SceneDelegate.swift */,
+				AE2E578029F5C01000E13612 /* AppDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
