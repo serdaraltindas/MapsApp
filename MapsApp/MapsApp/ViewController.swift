@@ -5,6 +5,9 @@ import CoreLocation
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapKit: MKMapView!
+    @IBOutlet weak var secilenYerTextField: UITextField!
+    @IBOutlet weak var secilenYerNotTextField: UITextField!
+    
     //Güncel Konumu almak için kullanıyoruz.
     var locationManager = CLLocationManager()
     
@@ -28,8 +31,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = dokunulanKoordinat
-            annotation.title = "Selected Area"
-            annotation.subtitle = "Selected"
+            annotation.title = secilenYerTextField.text
+            annotation.subtitle = secilenYerNotTextField.text
             mapKit.addAnnotation(annotation)
         }
     }

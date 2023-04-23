@@ -18,21 +18,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFm-IX-yeC">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="195" width="393" height="623"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Seçilen Yer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IL0-mD-0xm">
+                                <rect key="frame" x="16" y="90" width="361" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Not" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYt-lX-EfI">
+                                <rect key="frame" x="16" y="132" width="361" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DFm-IX-yeC" secondAttribute="trailing" id="AgB-uL-joB"/>
-                            <constraint firstItem="DFm-IX-yeC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Pfe-VS-pe1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DFm-IX-yeC" secondAttribute="bottom" id="SUn-Kj-fPS"/>
-                            <constraint firstItem="DFm-IX-yeC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="jri-mP-hjL"/>
+                            <constraint firstItem="DFm-IX-yeC" firstAttribute="top" secondItem="TYt-lX-EfI" secondAttribute="bottom" constant="29" id="8oE-jR-c9V"/>
+                            <constraint firstItem="IL0-mD-0xm" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="9YM-CJ-0oC"/>
+                            <constraint firstItem="IL0-mD-0xm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Aij-vL-iQI"/>
+                            <constraint firstItem="IL0-mD-0xm" firstAttribute="leading" secondItem="TYt-lX-EfI" secondAttribute="leading" id="BRr-iB-TTe"/>
+                            <constraint firstItem="TYt-lX-EfI" firstAttribute="top" secondItem="IL0-mD-0xm" secondAttribute="bottom" constant="8" id="G0W-mn-sT3"/>
+                            <constraint firstItem="DFm-IX-yeC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="I9k-Qi-ObV"/>
+                            <constraint firstItem="IL0-mD-0xm" firstAttribute="trailing" secondItem="TYt-lX-EfI" secondAttribute="trailing" id="Z0e-l6-mdd"/>
+                            <constraint firstItem="DFm-IX-yeC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b9S-zL-joe"/>
+                            <constraint firstItem="IL0-mD-0xm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="31" id="lFe-S3-zzu"/>
+                            <constraint firstItem="TYt-lX-EfI" firstAttribute="centerX" secondItem="DFm-IX-yeC" secondAttribute="centerX" id="oxt-mg-ciN"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapKit" destination="DFm-IX-yeC" id="TBn-3F-Rdj"/>
+                        <outlet property="secilenYerNotTextField" destination="TYt-lX-EfI" id="Wvx-b5-ECG"/>
+                        <outlet property="secilenYerTextField" destination="IL0-mD-0xm" id="dwf-wo-qRS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
