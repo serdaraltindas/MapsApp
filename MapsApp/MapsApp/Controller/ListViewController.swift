@@ -21,11 +21,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController?.navigationBar.topItem?.rightBarButtonItem?.tintColor = .white
         
     }
-    
     @objc func artiButtonTiklandi() {
         performSegue(withIdentifier: "toMapsVC", sender: nil)
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }

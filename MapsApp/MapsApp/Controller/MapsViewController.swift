@@ -49,7 +49,6 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             mapKit.addAnnotation(annotation)
         }
     }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.05 , longitudeDelta: 0.05)
@@ -57,7 +56,6 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         mapKit.setRegion(region, animated: true)
         
     }
-    
     @IBAction func kaydetButtonTiklandi(_ sender: UIButton) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
