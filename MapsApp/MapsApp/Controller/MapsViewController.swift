@@ -70,6 +70,13 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                                             mapKit.addAnnotation(annotation)
                                             secilenYerTextField.text = annotationTitle
                                             secilenYerNotTextField.text = annotationSubtitle
+                                            
+                                            locationManager.stopUpdatingLocation()
+                                            
+                                            let span = MKCoordinateSpan(latitudeDelta: 0.05 , longitudeDelta: 0.05)
+                                            let region = MKCoordinateRegion(center: coordinate, span: span)
+                                            mapKit.setRegion(region, animated: true)
+                                            
                                         }
                                     }
                                 }
@@ -84,6 +91,28 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             //NewData
         }
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseId = "benimAnnotation"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        
+        if pinView == nil {
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.tintColor = .black
+            
+            let button = UIButton(type: .detailDisclosure)
+            pinView?.rightCalloutAccessoryView = button
+            
+        }else {
+            pinView?.annotation = annotation
+        }
+        return pinView
+    }
+    
     @objc func konumSec(gestureRecognizer : UILongPressGestureRecognizer) {
         
         kaydetButton.isUserInteractionEnabled = true
@@ -103,11 +132,12 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05 , longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: location , span: span)
-        mapKit.setRegion(region, animated: true)
-        
+        if secilenIsim == "" {
+            let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.05 , longitudeDelta: 0.05)
+            let region = MKCoordinateRegion(center: location , span: span)
+            mapKit.setRegion(region, animated: true)
+        }
     }
     @IBAction func kaydetButtonTiklandi(_ sender: UIButton) {
         
@@ -127,6 +157,10 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         } catch {
             print("Error!")
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "yeniYerOlusturuldu"), object: nil)
+        navigationController?.popViewController(animated: true)
+        
     }
 }
 

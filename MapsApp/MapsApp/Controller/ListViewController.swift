@@ -29,7 +29,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         veriAl()
     }
-    func veriAl() {
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(veriAl), name: NSNotification.Name(rawValue: "yeniYerOlusturuldu"), object: nil)
+    }
+    @objc func veriAl() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Yer")
@@ -57,7 +60,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func artiButtonTiklandi() {
         secilenYerIsmi = ""
-        performSegue(withIdentifier: "toMapsVC", sender: nil)
+        performSegue(withIdentifier: "toMapsVC", sender: self)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return isimDizisi.count
@@ -70,7 +73,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         secilenYerIsmi = isimDizisi[indexPath.row]
         secilenYerId = idDizisi[indexPath.row]
-        shouldPerformSegue(withIdentifier: "toMapsVC", sender: nil)
+        performSegue(withIdentifier: "toMapsVC", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMapsVC" {
