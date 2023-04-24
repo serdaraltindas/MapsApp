@@ -14,7 +14,7 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var locationManager = CLLocationManager()
     var secilenLatitude = Double()
     var secilenLongitude = Double()
-    
+    toMapsVC
     var secilenIsim = ""
     var secilenId : UUID?
     
@@ -100,9 +100,9 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         
         if pinView == nil {
-            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true
-            pinView?.tintColor = .black
+            pinView?.tintColor = .white
             
             let button = UIButton(type: .detailDisclosure)
             pinView?.rightCalloutAccessoryView = button
@@ -111,6 +111,26 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             pinView?.annotation = annotation
         }
         return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if secilenIsim != "" {
+         
+            let requestLocation = CLLocation(latitude: annotationLatitude, longitude: annotationLongitude)
+            CLGeocoder().reverseGeocodeLocation(requestLocation) { (placemarkDizisi , error) in
+                    
+                if let placemarks = placemarkDizisi {
+                    if placemarks.count > 0 {
+                        let yeniPlacemark = MKPlacemark(placemark: placemarks[0])
+                        let item = MKMapItem(placemark: yeniPlacemark)
+                        item.name = self.annotationTitle
+                        
+                        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                        item.openInMaps(launchOptions: launchOptions)
+                    }
+                }
+            }
+        }
     }
     
     @objc func konumSec(gestureRecognizer : UILongPressGestureRecognizer) {
