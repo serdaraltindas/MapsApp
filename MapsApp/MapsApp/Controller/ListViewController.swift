@@ -15,6 +15,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var isimDizisi = [String]()
     var idDizisi = [UUID]()
     
+    var secilenYerIsmi = ""
+    var secilenYerId : UUID?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +55,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func artiButtonTiklandi() {
+        secilenYerIsmi = ""
         performSegue(withIdentifier: "toMapsVC", sender: nil)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,5 +65,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = UITableViewCell()
         cell.textLabel?.text = isimDizisi[indexPath.row]
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        secilenYerIsmi = isimDizisi[indexPath.row]
+        secilenYerId = idDizisi[indexPath.row]
+        shouldPerformSegue(withIdentifier: "toMapsVC", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMapsVC" {
+            let destinationVC = segue.destination as! MapsViewController
+            destinationVC.secilenIsim = secilenYerIsmi
+            destinationVC.secilenId = secilenYerId
+        }
     }
 }
