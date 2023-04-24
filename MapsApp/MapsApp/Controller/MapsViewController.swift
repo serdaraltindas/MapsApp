@@ -60,6 +60,16 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                                         annotationLatitude = latitude
                                         if let longitude = sonuc.value(forKey: "longitude") as? Double {
                                             annotationLongitude = longitude
+                                            
+                                            let annotation = MKPointAnnotation()
+                                            annotation.title = annotationTitle
+                                            annotation.subtitle = annotationSubtitle
+                                            let coordinate = CLLocationCoordinate2D(latitude: annotationLatitude, longitude: annotationLongitude)
+                                            annotation.coordinate = coordinate
+                                            
+                                            mapKit.addAnnotation(annotation)
+                                            secilenYerTextField.text = annotationTitle
+                                            secilenYerNotTextField.text = annotationSubtitle
                                         }
                                     }
                                 }
