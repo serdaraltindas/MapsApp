@@ -53,16 +53,16 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                     if sonuclar.count > 0 {
                         for sonuc in sonuclar as! [NSManagedObject] {
                             if let isim = sonuc.value(forKey: "isim") as? String {
-                                
-                            }
-                            if let not = sonuc.value(forKey: "not") as? String {
-                                
-                            }
-                            if let latitude = sonuc.value(forKey: "latitude") as? Double {
-                                
-                            }
-                            if let longitude = sonuc.value(forKey: "longitude") as? Double {
-                                
+                                annotationTitle = isim
+                                if let not = sonuc.value(forKey: "not") as? String {
+                                    annotationSubtitle = not
+                                    if let latitude = sonuc.value(forKey: "latitude") as? Double {
+                                        annotationLatitude = latitude
+                                        if let longitude = sonuc.value(forKey: "longitude") as? Double {
+                                            annotationLongitude = longitude
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -73,7 +73,6 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }else{
             //NewData
         }
-        
     }
     @objc func konumSec(gestureRecognizer : UILongPressGestureRecognizer) {
         
@@ -119,7 +118,5 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             print("Error!")
         }
     }
-    
-    
 }
 
