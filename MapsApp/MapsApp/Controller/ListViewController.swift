@@ -26,6 +26,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(artiButtonTiklandi))
         navigationController?.navigationBar.topItem?.rightBarButtonItem?.tintColor = .white
+        
         veriAl()
     }
     func veriAl() {
